@@ -11,7 +11,7 @@ const request = require(`request`);
 const fetchMyIP = function(callback) {
   request(`https://api.ipify.org/?format=json`, (error, response, body) => {
     if (body) {
-      callback(body);
+      callback(error, JSON.parse(body).ip);
     }
   });
 };
