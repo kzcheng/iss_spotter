@@ -25,7 +25,16 @@ const iss = require('./iss');
 //   });
 // });
 
+// third test, testing fetchISSFlyOverTimes
 iss.fetchISSFlyOverTimes({ latitude: '49.26200', longitude: '-123.09230' }, (error, data)=>{
   console.log('Error: ' , error);
   console.log('Data: ' , data);
+});
+
+// final test, testing them together
+iss.nextISSTimesForMyLocation((error, passTimes) => {
+  if (error) {
+    return console.log("It didn't work!", error);
+  }
+  console.log(passTimes);
 });
