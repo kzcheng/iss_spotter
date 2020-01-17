@@ -18,9 +18,14 @@ const iss = require('./iss');
 // });
 
 // small test, make them work together
-iss.fetchMyIP((error, ip) => {
-  iss.fetchCoordsByIP(ip, (error, data) => {
-    console.log('Error: ' , error);
-    console.log('Data: ' , data);
-  });
+// iss.fetchMyIP((error, ip) => {
+//   iss.fetchCoordsByIP(ip, (error, data) => {
+//     console.log('Error: ' , error);
+//     console.log('Data: ' , data);
+//   });
+// });
+
+iss.fetchISSFlyOverTimes({ latitude: '49.26200', longitude: '-123.09230' }, (error, data)=>{
+  console.log('Error: ' , error);
+  console.log('Data: ' , data);
 });
