@@ -30,8 +30,34 @@ const fetchMyIP = function(callback) {
   });
 };
 
+/**
+ * Makes a single API request to retrieve the lat/lng for a given IPv4 address.
+ * Input:
+ *   - The ip (ipv4) address (string)
+ *   - A callback (to pass back an error or the lat/lng object)
+ * Returns (via Callback):
+ *   - An error, if any (nullable)
+ *   - The lat and lng as an object (null if error). Example:
+ *     { latitude: '49.27670', longitude: '-123.13000' }
+ */
 const fetchCoordsByIP = function(ip, callback) {
-  callback();
+  request(`https://ipvigilante.com/${ip}`, (error, response, body) => {
+    // if non-200 status, assume server error
+    if (response.statusCode !== 200) {
+      const msg = `Status Code ${response.statusCode} when fetching IP. Response: ${body}`;
+      callback(Error(msg), null);
+      return;
+    }
+
+    // if we get here, all's well and we got the data
+    if (body) {
+      const { latitude, longitude } = JSON.parse(body).data;
+      callback(
+        null,
+        { latitude, longitude }
+      );
+    }
+  });
 };
 
 module.exports = {

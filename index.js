@@ -12,7 +12,15 @@ const iss = require('./iss');
 // });
 
 // second test, testing fetchCoordsByIP
-iss.fetchCoordsByIP(`162.245.144.188`, (error, data) => {
-  console.log('Error: ' , error);
-  console.log('Data: ' , data);
+// iss.fetchCoordsByIP(`162.245.144.188`, (error, data) => {
+//   console.log('Error: ' , error);
+//   console.log('Data: ' , data);
+// });
+
+// small test, make them work together
+iss.fetchMyIP((error, ip) => {
+  iss.fetchCoordsByIP(ip, (error, data) => {
+    console.log('Error: ' , error);
+    console.log('Data: ' , data);
+  });
 });
